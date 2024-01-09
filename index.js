@@ -1,10 +1,14 @@
-const http = require("http");
-const data = require("./Data");
+const path = require("path");
+const fs = require("fs");
+const dirPath = path.join(__dirname, "files");
 
-http
-  .createServer((req, resp) => {
-    resp.writeHead(200, { "Content-Type": "applicationjson" });
-    resp.write(JSON.stringify(data));
-    resp.end();
-  })
-  .listen(4600);
+// fs.writeFileSync(`${dirPath}/app.txt`, "This is simple text file");
+// fs.readFile(`${dirPath}/app.txt`, "utf8", (err, item) => {
+//   console.warn(item);
+// });
+fs.appendFile(`${dirPath}/app.txt`, " and file name is app.txt", (err) => {
+  if (!err) {
+    console.log("file is updated");
+  }
+});
+fs.unlinkSync(`${dirPath}/app1.txt`);
